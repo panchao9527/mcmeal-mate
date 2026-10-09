@@ -82,6 +82,6 @@ python -X utf8 -m unittest discover -s tests -v
 
 22 项自动测试覆盖预算、未知信息、优惠券归属与次数、数量限制、共享能量、分账守恒、官方报价超预算和只读调用边界。实际调用情况见 [MCP_INTEGRATION.md](MCP_INTEGRATION.md)。
 
-本项目参加 [麦当劳程序员创意开发大赛](https://github.com/M-China/mcd-developer-innovation-challenge)，报名及排名时间为北京时间 2026-10-09 10:30 至 2026-10-25 23:59。当前开发使用 Codex，未申报 WorkBuddy 专项开发奖励，未提交虚构的 WorkBuddy 对话记录。
+本项目参加 [麦当劳程序员创意开发大赛](https://github.com/M-China/mcd-developer-innovation-challenge)，已提交 [报名申请 Issue #82](https://github.com/M-China/mcd-developer-innovation-challenge/issues/82)，审核结果以官方回复为准。报名及排名时间为北京时间 2026-10-09 10:30 至 2026-10-25 23:59。当前开发使用 Codex，未申报 WorkBuddy 专项开发奖励，未提交虚构的 WorkBuddy 对话记录。
 
 原创代码采用 [MIT License](LICENSE)。官方声明保持原文；官方 MCP 使用条款及数据、商标权利不因本项目许可证而改变。
