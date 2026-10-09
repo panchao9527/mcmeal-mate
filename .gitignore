@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+*.token
+*.pem
+__pycache__/
+*.pyc
+.venv/
+private/
+local-runs/

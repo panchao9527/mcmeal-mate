@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>麦麦搭子 · 每个人都被照顾到</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<header><a class="brand" href="/">m<span class="brand-dot">.</span><strong>麦麦搭子</strong><span class="english">McMealMate</span></a><span class="badge">MCP 实测作品 · 2026</span></header>
+<main>
+<section class="hero"><div><p class="eyebrow">GOOD FOOD. GOOD COMPANY.</p><h1>四个人的口味，<br>一次<span>安排好。</span></h1><p class="intro">有人不吃牛肉，有人想控制能量。<br>一起吃饭，也让每个人的需求被照顾到。</p><div class="hero-tags"><span>多人配餐</span><span>预算分账</span><span>逐条验收</span></div></div>
+<div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="float-note note-one">小王：主食不要牛肉</div><div class="float-note note-two">小李：饮料选无糖</div><div class="burger"><div class="bun top-bun"><i></i><i></i><i></i></div><div class="lettuce"></div><div class="cheese"></div><div class="patty"></div><div class="bun bottom-bun"></div></div><span class="art-caption">LET'S EAT TOGETHER.</span></div></section>
+<section class="workspace">
+<aside class="setup"><p class="eyebrow">01 / 安排这顿饭</p><h2>先说说大家的要求</h2><div class="scenario-buttons"><button data-budget="150">加班饭局</button><button data-budget="120">预算降到 120</button><button data-budget="80">试试预算不足</button></div>
+<label class="budget-label" for="budget">整顿饭预算<strong id="budget-value">¥150</strong></label><input id="budget" type="range" min="60" max="180" step="1" value="150"><div class="range-label"><span>¥60</span><span>¥180</span></div>
+<div class="people"><div><span class="avatar peach">我</span><p><strong>我</strong><small>汉堡、薯条、饮料都要 · 偏爱经典</small></p></div><div><span class="avatar yellow">王</span><p><strong>小王</strong><small>主食不要牛肉 · 偏爱板烧</small></p></div><div><span class="avatar green">李</span><p><strong>小李</strong><small>个人餐 + 均分小食 ≤ 600 kcal</small></p></div><div><span class="avatar purple">陈</span><p><strong>小陈</strong><small>想吃辣，也喜欢薯条</small></p></div></div>
+<label class="switch-line"><input id="zero" type="checkbox" checked> 小李的饮料必须无糖</label><label class="switch-line"><input id="shared" type="checkbox" checked> 再来一份共享中薯条</label>
+<button class="primary" id="generate">安排一下 <span>↗</span></button><p class="small-note">偏好分类只用于配餐。过敏或特殊饮食需求，请向官方确认完整配料。</p></aside>
+<section class="results"><div class="results-heading"><div><p class="eyebrow">02 / 这顿饭的方案</p><h2>每个人，都有自己的那一份</h2></div><div class="tabs"><button data-strategy="preference" class="active">照顾口味</button><button data-strategy="economy">优先省钱</button></div></div>
+<div id="result" aria-live="polite"><p>正在安排……</p></div>
+<div class="source-note"><span class="source-dot"></span><p><strong>使用官方 MCP 的历史现场数据</strong><br><span id="source-text">正在读取数据来源……</span><br>交互方案按历史报价计算；当前整单价格需再次调用官方工具核实。</p></div>
+</section></section>
+<footer><p>大家负责想吃什么，麦麦搭子负责把一顿饭安排明白。</p><span>社区参赛作品 · 非麦当劳官方产品</span></footer>
+</main><script src="/app.js"></script></body></html>

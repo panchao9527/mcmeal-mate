@@ -1,0 +1,142 @@
+{
+  "server": {
+    "name": "mcd-mcp",
+    "version": "1.0.0"
+  },
+  "records": [
+    {
+      "tool": "query-nearby-stores",
+      "datetime": "2026-10-09 18:41:27",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "query-meals",
+      "datetime": "2026-10-09 18:41:29",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "list-nutrition-foods",
+      "datetime": "2026-10-09 18:41:30",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-09 18:41:33",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-09 18:41:35",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-09 18:41:37",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-09 18:41:39",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-09 18:41:41",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-09 18:41:42",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-09 18:41:43",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-09 18:41:45",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-09 18:41:46",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-09 18:41:48",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-09 18:41:50",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-09 18:41:51",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-09 18:41:54",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-09 18:41:56",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-09 18:41:57",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-09 18:42:00",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-09 18:42:02",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-09 18:42:03",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-09 18:42:05",
+      "business_success": true,
+      "code": 200
+    }
+  ],
+  "mutating_tools_called": [],
+  "note": "仅只读业务查询与试算；没有创建订单、领券或购买会员卡。"
+}

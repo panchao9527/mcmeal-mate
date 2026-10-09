@@ -1,0 +1,510 @@
+{
+  "source": {
+    "kind": "official-mcp-snapshot",
+    "endpoint": "https://mcp.mcd.cn",
+    "fetched_at": "2026-10-09 18:42:05",
+    "store_code": "1450713",
+    "store_name": "麦当劳上海黄浦华旭国际大厦餐厅",
+    "order_type": 1,
+    "be_type": 1,
+    "notice": "历史现场快照；价格、供应和营养需在使用时重新查询。"
+  },
+  "fee_cents": 0,
+  "offers": [
+    {
+      "id": "1450-water",
+      "name": "麦香鸡 + 纯悦",
+      "price_cents": 2450,
+      "kcal": 369,
+      "available": true,
+      "categories": [
+        "drink",
+        "main"
+      ],
+      "tags": [
+        "burger"
+      ],
+      "known_tags": [
+        "beef",
+        "sugary-drink"
+      ],
+      "items": [
+        {
+          "productCode": "1450",
+          "quantity": 1
+        },
+        {
+          "productCode": "3757",
+          "quantity": 1
+        }
+      ],
+      "components": [
+        {
+          "name": "麦香鸡",
+          "category": "main",
+          "kcal": 369
+        },
+        {
+          "name": "纯悦",
+          "category": "drink",
+          "kcal": 0
+        }
+      ],
+      "classification_note": "主食肉类及饮料偏好分类；不代表配料或过敏原核查"
+    },
+    {
+      "id": "1406-water",
+      "name": "板烧鸡腿堡 + 纯悦",
+      "price_cents": 3100,
+      "kcal": 391,
+      "available": true,
+      "categories": [
+        "drink",
+        "main"
+      ],
+      "tags": [
+        "burger",
+        "grilled"
+      ],
+      "known_tags": [
+        "beef",
+        "sugary-drink"
+      ],
+      "items": [
+        {
+          "productCode": "1406",
+          "quantity": 1
+        },
+        {
+          "productCode": "3757",
+          "quantity": 1
+        }
+      ],
+      "components": [
+        {
+          "name": "板烧鸡腿堡",
+          "category": "main",
+          "kcal": 391
+        },
+        {
+          "name": "纯悦",
+          "category": "drink",
+          "kcal": 0
+        }
+      ],
+      "classification_note": "主食肉类及饮料偏好分类；不代表配料或过敏原核查"
+    },
+    {
+      "id": "1440-water",
+      "name": "麦辣鸡腿汉堡 + 纯悦",
+      "price_cents": 3000,
+      "kcal": 485,
+      "available": true,
+      "categories": [
+        "drink",
+        "main"
+      ],
+      "tags": [
+        "burger",
+        "spicy"
+      ],
+      "known_tags": [
+        "beef",
+        "sugary-drink"
+      ],
+      "items": [
+        {
+          "productCode": "1440",
+          "quantity": 1
+        },
+        {
+          "productCode": "3757",
+          "quantity": 1
+        }
+      ],
+      "components": [
+        {
+          "name": "麦辣鸡腿汉堡",
+          "category": "main",
+          "kcal": 485
+        },
+        {
+          "name": "纯悦",
+          "category": "drink",
+          "kcal": 0
+        }
+      ],
+      "classification_note": "主食肉类及饮料偏好分类；不代表配料或过敏原核查"
+    },
+    {
+      "id": "1100-water",
+      "name": "巨无霸 + 纯悦",
+      "price_cents": 3300,
+      "kcal": 513,
+      "available": true,
+      "categories": [
+        "drink",
+        "main"
+      ],
+      "tags": [
+        "beef",
+        "burger",
+        "classic"
+      ],
+      "known_tags": [
+        "beef",
+        "sugary-drink"
+      ],
+      "items": [
+        {
+          "productCode": "1100",
+          "quantity": 1
+        },
+        {
+          "productCode": "3757",
+          "quantity": 1
+        }
+      ],
+      "components": [
+        {
+          "name": "巨无霸",
+          "category": "main",
+          "kcal": 513
+        },
+        {
+          "name": "纯悦",
+          "category": "drink",
+          "kcal": 0
+        }
+      ],
+      "classification_note": "主食肉类及饮料偏好分类；不代表配料或过敏原核查"
+    },
+    {
+      "id": "9900005453-zero",
+      "name": "麦香鸡中套餐（无糖可乐）",
+      "price_cents": 2800,
+      "kcal": 658,
+      "available": true,
+      "categories": [
+        "main",
+        "fries",
+        "drink"
+      ],
+      "tags": [
+        "burger",
+        "fries"
+      ],
+      "known_tags": [
+        "beef",
+        "sugary-drink"
+      ],
+      "items": [
+        {
+          "productCode": "9900005453",
+          "quantity": 1,
+          "roundList": [
+            {
+              "round": "1",
+              "comboItemList": [
+                {
+                  "code": "1450",
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "round": "2",
+              "comboItemList": [
+                {
+                  "code": "4810",
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "round": "3",
+              "comboItemList": [
+                {
+                  "code": "3071",
+                  "quantity": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "components": [
+        {
+          "name": "麦香鸡",
+          "category": "main",
+          "kcal": 369
+        },
+        {
+          "name": "中薯条",
+          "category": "fries",
+          "kcal": 289
+        },
+        {
+          "name": "无糖可口可乐中杯",
+          "category": "drink",
+          "kcal": 0
+        }
+      ],
+      "classification_note": "主食肉类及饮料偏好分类；不代表配料或过敏原核查"
+    },
+    {
+      "id": "9900005462-zero",
+      "name": "板烧鸡腿堡三件套（无糖可乐）",
+      "price_cents": 3450,
+      "kcal": 680,
+      "available": true,
+      "categories": [
+        "main",
+        "fries",
+        "drink"
+      ],
+      "tags": [
+        "burger",
+        "fries",
+        "grilled"
+      ],
+      "known_tags": [
+        "beef",
+        "sugary-drink"
+      ],
+      "items": [
+        {
+          "productCode": "9900005462",
+          "quantity": 1,
+          "roundList": [
+            {
+              "round": "1",
+              "comboItemList": [
+                {
+                  "code": "1406",
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "round": "2",
+              "comboItemList": [
+                {
+                  "code": "4810",
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "round": "3",
+              "comboItemList": [
+                {
+                  "code": "3071",
+                  "quantity": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "components": [
+        {
+          "name": "板烧鸡腿堡",
+          "category": "main",
+          "kcal": 391
+        },
+        {
+          "name": "中薯条",
+          "category": "fries",
+          "kcal": 289
+        },
+        {
+          "name": "无糖可口可乐中杯",
+          "category": "drink",
+          "kcal": 0
+        }
+      ],
+      "classification_note": "主食肉类及饮料偏好分类；不代表配料或过敏原核查"
+    },
+    {
+      "id": "9900005456-zero",
+      "name": "麦辣鸡腿汉堡三件套（无糖可乐）",
+      "price_cents": 3350,
+      "kcal": 774,
+      "available": true,
+      "categories": [
+        "main",
+        "fries",
+        "drink"
+      ],
+      "tags": [
+        "burger",
+        "fries",
+        "spicy"
+      ],
+      "known_tags": [
+        "beef",
+        "sugary-drink"
+      ],
+      "items": [
+        {
+          "productCode": "9900005456",
+          "quantity": 1,
+          "roundList": [
+            {
+              "round": "1",
+              "comboItemList": [
+                {
+                  "code": "1440",
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "round": "2",
+              "comboItemList": [
+                {
+                  "code": "4810",
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "round": "3",
+              "comboItemList": [
+                {
+                  "code": "3071",
+                  "quantity": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "components": [
+        {
+          "name": "麦辣鸡腿汉堡",
+          "category": "main",
+          "kcal": 485
+        },
+        {
+          "name": "中薯条",
+          "category": "fries",
+          "kcal": 289
+        },
+        {
+          "name": "无糖可口可乐中杯",
+          "category": "drink",
+          "kcal": 0
+        }
+      ],
+      "classification_note": "主食肉类及饮料偏好分类；不代表配料或过敏原核查"
+    },
+    {
+      "id": "9900005449-zero",
+      "name": "吉士汉堡包中套餐（无糖可乐）",
+      "price_cents": 2600,
+      "kcal": 583,
+      "available": true,
+      "categories": [
+        "main",
+        "fries",
+        "drink"
+      ],
+      "tags": [
+        "burger",
+        "fries",
+        "classic",
+        "beef"
+      ],
+      "known_tags": [
+        "beef",
+        "sugary-drink"
+      ],
+      "items": [
+        {
+          "productCode": "9900005449",
+          "quantity": 1,
+          "roundList": [
+            {
+              "round": "1",
+              "comboItemList": [
+                {
+                  "code": "1010",
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "round": "2",
+              "comboItemList": [
+                {
+                  "code": "4810",
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "round": "3",
+              "comboItemList": [
+                {
+                  "code": "3071",
+                  "quantity": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "components": [
+        {
+          "name": "吉士汉堡包",
+          "category": "main",
+          "kcal": 294
+        },
+        {
+          "name": "中薯条",
+          "category": "fries",
+          "kcal": 289
+        },
+        {
+          "name": "无糖可口可乐中杯",
+          "category": "drink",
+          "kcal": 0
+        }
+      ],
+      "classification_note": "主食肉类及饮料偏好分类；不代表配料或过敏原核查"
+    },
+    {
+      "id": "shared-fries",
+      "name": "中薯条",
+      "price_cents": 1350,
+      "kcal": 289,
+      "available": true,
+      "categories": [
+        "fries"
+      ],
+      "tags": [
+        "fries"
+      ],
+      "known_tags": [
+        "beef",
+        "sugary-drink"
+      ],
+      "items": [
+        {
+          "productCode": "4810",
+          "quantity": 1
+        }
+      ],
+      "components": [
+        {
+          "name": "中薯条",
+          "category": "fries",
+          "kcal": 289
+        }
+      ],
+      "classification_note": "主食肉类及饮料偏好分类；不代表配料或过敏原核查"
+    }
+  ]
+}

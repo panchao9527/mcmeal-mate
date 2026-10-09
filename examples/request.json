@@ -1,0 +1,10 @@
+{
+  "budget_cents": 15000,
+  "participants": [
+    {"id":"me","name":"我","required_categories":["main","fries","drink"],"prefer_tags":["burger","classic"]},
+    {"id":"wang","name":"小王","exclude_tags":["beef"],"required_categories":["main","drink"],"prefer_tags":["grilled"]},
+    {"id":"li","name":"小李","exclude_tags":["sugary-drink"],"max_kcal":600,"required_categories":["main","drink"],"prefer_tags":["grilled"]},
+    {"id":"chen","name":"小陈","required_categories":["main","drink"],"prefer_tags":["spicy","fries"]}
+  ],
+  "shared": [{"offer_id":"shared-fries","quantity":1,"participant_ids":["me","wang","li","chen"]}]
+}

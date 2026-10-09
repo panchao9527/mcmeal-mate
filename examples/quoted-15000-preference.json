@@ -1,0 +1,312 @@
+{
+  "status": "quoted",
+  "strategy": "preference",
+  "total_cents": 13500,
+  "remaining_cents": 1500,
+  "preference_score": 6,
+  "allocations": [
+    {
+      "participant_id": "me",
+      "name": "我",
+      "offer_id": "9900005449-zero",
+      "meal": "吉士汉堡包中套餐（无糖可乐）",
+      "items": [
+        {
+          "productCode": "9900005449",
+          "quantity": 1,
+          "roundList": [
+            {
+              "round": "1",
+              "comboItemList": [
+                {
+                  "code": "1010",
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "round": "2",
+              "comboItemList": [
+                {
+                  "code": "4810",
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "round": "3",
+              "comboItemList": [
+                {
+                  "code": "3071",
+                  "quantity": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "kcal": 583,
+      "meal_cents": 2600,
+      "shared_kcal": 72.25,
+      "shared_cents": 338,
+      "fee_cents": 0,
+      "total_cents": 2938,
+      "matched_preferences": [
+        "burger",
+        "classic"
+      ],
+      "unmet_preferences": [],
+      "official_adjustment_cents": 0
+    },
+    {
+      "participant_id": "wang",
+      "name": "小王",
+      "offer_id": "1406-water",
+      "meal": "板烧鸡腿堡 + 纯悦",
+      "items": [
+        {
+          "productCode": "1406",
+          "quantity": 1
+        },
+        {
+          "productCode": "3757",
+          "quantity": 1
+        }
+      ],
+      "kcal": 391,
+      "meal_cents": 3100,
+      "shared_kcal": 72.25,
+      "shared_cents": 338,
+      "fee_cents": 0,
+      "total_cents": 3438,
+      "matched_preferences": [
+        "grilled"
+      ],
+      "unmet_preferences": [],
+      "official_adjustment_cents": 0
+    },
+    {
+      "participant_id": "li",
+      "name": "小李",
+      "offer_id": "1406-water",
+      "meal": "板烧鸡腿堡 + 纯悦",
+      "items": [
+        {
+          "productCode": "1406",
+          "quantity": 1
+        },
+        {
+          "productCode": "3757",
+          "quantity": 1
+        }
+      ],
+      "kcal": 391,
+      "meal_cents": 3100,
+      "shared_kcal": 72.25,
+      "shared_cents": 337,
+      "fee_cents": 0,
+      "total_cents": 3437,
+      "matched_preferences": [
+        "grilled"
+      ],
+      "unmet_preferences": [],
+      "official_adjustment_cents": 0
+    },
+    {
+      "participant_id": "chen",
+      "name": "小陈",
+      "offer_id": "9900005456-zero",
+      "meal": "麦辣鸡腿汉堡三件套（无糖可乐）",
+      "items": [
+        {
+          "productCode": "9900005456",
+          "quantity": 1,
+          "roundList": [
+            {
+              "round": "1",
+              "comboItemList": [
+                {
+                  "code": "1440",
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "round": "2",
+              "comboItemList": [
+                {
+                  "code": "4810",
+                  "quantity": 1
+                }
+              ]
+            },
+            {
+              "round": "3",
+              "comboItemList": [
+                {
+                  "code": "3071",
+                  "quantity": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "kcal": 774,
+      "meal_cents": 3350,
+      "shared_kcal": 72.25,
+      "shared_cents": 337,
+      "fee_cents": 0,
+      "total_cents": 3687,
+      "matched_preferences": [
+        "fries",
+        "spicy"
+      ],
+      "unmet_preferences": [],
+      "official_adjustment_cents": 0
+    }
+  ],
+  "shared": [
+    {
+      "offer_id": "shared-fries",
+      "quantity": 1,
+      "participant_ids": [
+        "me",
+        "wang",
+        "li",
+        "chen"
+      ]
+    }
+  ],
+  "search_complete": true,
+  "search_nodes": 893,
+  "scope": "只在本次提供的候选餐中比较；共享小食能量按食用成员均分计入上限。",
+  "source": {
+    "kind": "official-mcp-snapshot",
+    "endpoint": "https://mcp.mcd.cn",
+    "fetched_at": "2026-10-09 18:42:05",
+    "store_code": "1450713",
+    "store_name": "麦当劳上海黄浦华旭国际大厦餐厅",
+    "order_type": 1,
+    "be_type": 1,
+    "notice": "历史现场快照；价格、供应和营养需在使用时重新查询。"
+  },
+  "acceptance": [
+    {
+      "check": "成员无遗漏",
+      "status": "PASS",
+      "detail": "4/4"
+    },
+    {
+      "check": "官方金额不超预算",
+      "status": "PASS",
+      "detail": "13500/15000 分"
+    },
+    {
+      "check": "已知偏好排除项",
+      "status": "PASS",
+      "detail": "含未知信息的候选已排除；不用于过敏安全判断"
+    },
+    {
+      "check": "必选餐品与指定能量上限",
+      "status": "PASS",
+      "detail": "共享小食参考能量已按食用成员均分计入"
+    },
+    {
+      "check": "分账金额守恒",
+      "status": "PASS"
+    },
+    {
+      "check": "优惠券所属账号及次数",
+      "status": "PASS",
+      "detail": "无券或在已提供限制内"
+    },
+    {
+      "check": "当前整单官方价格",
+      "status": "PASS",
+      "detail": "calculate-price 已返回业务成功；整单价差按原分账比例分摊"
+    }
+  ],
+  "estimated_total_cents": 13500,
+  "quoted_at": "2026-10-09 18:52:22",
+  "order_items": [
+    {
+      "productCode": "9900005449",
+      "quantity": 1,
+      "roundList": [
+        {
+          "round": "1",
+          "comboItemList": [
+            {
+              "code": "1010",
+              "quantity": 1
+            }
+          ]
+        },
+        {
+          "round": "2",
+          "comboItemList": [
+            {
+              "code": "4810",
+              "quantity": 1
+            }
+          ]
+        },
+        {
+          "round": "3",
+          "comboItemList": [
+            {
+              "code": "3071",
+              "quantity": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "productCode": "1406",
+      "quantity": 2
+    },
+    {
+      "productCode": "3757",
+      "quantity": 2
+    },
+    {
+      "productCode": "9900005456",
+      "quantity": 1,
+      "roundList": [
+        {
+          "round": "1",
+          "comboItemList": [
+            {
+              "code": "1440",
+              "quantity": 1
+            }
+          ]
+        },
+        {
+          "round": "2",
+          "comboItemList": [
+            {
+              "code": "4810",
+              "quantity": 1
+            }
+          ]
+        },
+        {
+          "round": "3",
+          "comboItemList": [
+            {
+              "code": "3071",
+              "quantity": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "productCode": "4810",
+      "quantity": 1
+    }
+  ]
+}

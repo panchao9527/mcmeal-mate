@@ -1,0 +1,28 @@
+{
+  "server": {
+    "name": "mcd-mcp",
+    "version": "1.0.0"
+  },
+  "records": [
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-09 18:52:22",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-09 18:52:24",
+      "business_success": true,
+      "code": 200
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-09 18:52:25",
+      "business_success": true,
+      "code": 200
+    }
+  ],
+  "mutating_tools_called": [],
+  "note": "仅只读业务查询与试算；没有创建订单、领券或购买会员卡。"
+}
