@@ -1,5 +1,7 @@
 本项目代码、界面和说明为原创实现，使用 AI 编程辅助开发。
 
+`examples/skill-demo/` 中的门店、商品、营养和金额均为虚构离线演示；便携Skill包只包含这些演示，不包含历史真实调用记录。
+
 `CONTEST_DECLARATION.md` 从麦当劳官方活动仓库复制，内容与字节均保持不变，用于满足参赛要求；该官方文件、第三方商标及官方服务和数据权利不受本项目 MIT License 重新授权。
 
 官方声明来源：https://github.com/M-China/mcd-developer-innovation-challenge/blob/main/CONTEST_DECLARATION.md

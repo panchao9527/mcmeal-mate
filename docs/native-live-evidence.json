@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-10",
+  "scope": "Official MCP protocol harness feeding the offline Skill bridge; not a WorkBuddy UI import test",
+  "store_name": "麦当劳上海黄浦华旭国际大厦餐厅",
+  "context": {
+    "storeCode": "1450713",
+    "orderType": 1,
+    "beType": 1
+  },
+  "people_are_fictional": true,
+  "new_helper_network_calls": 0,
+  "mutating_mcp_tools_called": [],
+  "tool_records": [
+    {
+      "tool": "list-nutrition-foods",
+      "datetime": "2026-10-10 16:31:32",
+      "business_success": true
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-10 16:31:34",
+      "business_success": true
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-10 16:31:36",
+      "business_success": true
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-10 16:31:39",
+      "business_success": true
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-10 16:31:44",
+      "business_success": true
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-10 16:31:47",
+      "business_success": true
+    },
+    {
+      "tool": "query-meal-detail",
+      "datetime": "2026-10-10 16:31:51",
+      "business_success": true
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-10 16:31:57",
+      "business_success": true
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-10 16:32:03",
+      "business_success": true
+    },
+    {
+      "tool": "calculate-price",
+      "datetime": "2026-10-10 16:32:09",
+      "business_success": true
+    }
+  ],
+  "results": [
+    {
+      "strategy": "preference",
+      "total_cents": 9150,
+      "quoted_at": "2026-10-10 16:32:03",
+      "allocations": [
+        {
+          "name": "小林",
+          "meal": "双层吉士汉堡 + 纯悦",
+          "total_cents": 3050
+        },
+        {
+          "name": "小周",
+          "meal": "板烧鸡腿堡 + 纯悦",
+          "total_cents": 3100
+        },
+        {
+          "name": "小陈",
+          "meal": "麦辣鸡腿汉堡 + 纯悦",
+          "total_cents": 3000
+        }
+      ]
+    },
+    {
+      "strategy": "economy",
+      "total_cents": 9000,
+      "quoted_at": "2026-10-10 16:32:09",
+      "allocations": [
+        {
+          "name": "小林",
+          "meal": "麦辣鸡腿汉堡 + 纯悦",
+          "total_cents": 3000
+        },
+        {
+          "name": "小周",
+          "meal": "麦辣鸡腿汉堡 + 纯悦",
+          "total_cents": 3000
+        },
+        {
+          "name": "小陈",
+          "meal": "麦辣鸡腿汉堡 + 纯悦",
+          "total_cents": 3000
+        }
+      ]
+    }
+  ]
+}
