@@ -1,0 +1,47 @@
+{
+  "budget_cents": 10000,
+  "participants": [
+    {
+      "id": "me",
+      "name": "小周",
+      "required_categories": [
+        "main",
+        "drink"
+      ],
+      "prefer_tags": [
+        "burger",
+        "classic"
+      ]
+    },
+    {
+      "id": "wang",
+      "name": "小王",
+      "exclude_tags": [
+        "beef"
+      ],
+      "required_categories": [
+        "main",
+        "drink"
+      ],
+      "prefer_tags": [
+        "grilled"
+      ]
+    },
+    {
+      "id": "li",
+      "name": "小李",
+      "exclude_tags": [
+        "sugary-drink"
+      ],
+      "max_kcal": 600,
+      "required_categories": [
+        "main",
+        "drink"
+      ],
+      "prefer_tags": [
+        "grilled"
+      ]
+    }
+  ],
+  "shared": []
+}

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 from .planner import plan
 from .live import Session, save
@@ -32,8 +33,11 @@ def main():
     quote.add_argument("--out",default="local-runs/quoted-plan.json")
     web=commands.add_parser("serve")
     web.add_argument("--port",type=int,default=8765)
+    web.add_argument("--token-file",help="仅从指定本机文件读取Token；凭证不会发送到浏览器")
     args=parser.parse_args()
     if args.command=="serve":
+        if args.token_file:
+            os.environ['MCD_MCP_TOKEN']=Path(args.token_file).read_text(encoding='utf-8').strip()
         from .web import serve
         serve(args.port)
         return

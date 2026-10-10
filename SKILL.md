@@ -28,6 +28,8 @@ description: 基于麦当劳中国 MCP 为 1 至 8 人安排一顿饭，处理�
 
 ## 运行规划与验收
 
+用户希望自行操作时，可启动 `python -X utf8 -m mcmeal serve` 并使用本机页面。页面支持成员编辑与历史/实时两种模式；实时模式先搜索并选择营业门店，再生成方案。本机配置 `MCD_MCP_TOKEN` 或显式指定 `serve --token-file`，凭证不进入网页。页面流程限到店自取精选候选。
+
 本技能目录包含可运行 Python 包。以 [examples/request.json](examples/request.json) 为输入参考，将自然语言要求写成 JSON；金额用整数分，未知属性不要标记成已确认。
 
 ```text
@@ -35,7 +37,7 @@ python -X utf8 -m mcmeal plan --request local-runs/request.json --menu local-run
 python -X utf8 -m mcmeal plan --request local-runs/request.json --menu local-runs/menu.json --strategy economy
 ```
 
-在本技能目录执行命令。内置 `refresh` 适配器只覆盖到店自取、精选餐品、无券方案；其他场景直接使用 MCP 工具，并根据已核实结果构建同样的数据结构。不要声称内置适配器覆盖全部菜单、全平台优惠或所有业务场景。
+在本技能目录执行命令。内置 `refresh` 适配器覆盖到店自取、早餐/正餐精选餐品、无券方案；其他场景直接使用 MCP 工具，并根据已核实结果构建同样的数据结构。不要声称内置适配器覆盖全部菜单、全平台优惠或所有业务场景。早餐未供应中薯时，保留用户的薯条要求并说明冲突，由用户调整。
 
 候选含 `id/name/price_cents/kcal/available/categories/tags/known_tags/items`。`tags` 是已确认的命中属性，`known_tags` 是已核实存在或不存在的属性；有排除项且属性未知的候选不会通过。`items` 保留真实商品编码和套餐 `roundList`，不凭名称猜编码。`coupon` 若存在必须包含真实付款账号标识、可用次数，且 `items` 包含官方要求的券参数；券标识仅保存在本机。
 

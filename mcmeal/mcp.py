@@ -83,7 +83,7 @@ class Client:
         result = self._send("initialize", {
             "protocolVersion": self.protocol,
             "capabilities": {},
-            "clientInfo": {"name": "mcmeal-mate", "version": "0.1.0"},
+            "clientInfo": {"name": "mcmeal-mate", "version": "0.2.0"},
         })
         self.protocol = result.get("protocolVersion", self.protocol)
         self._send("notifications/initialized", notify=True)

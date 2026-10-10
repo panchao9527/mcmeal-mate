@@ -1,0 +1,273 @@
+{
+  "status": "quoted",
+  "strategy": "preference",
+  "total_cents": 6250,
+  "remaining_cents": 3750,
+  "preference_score": 3,
+  "allocations": [
+    {
+      "participant_id": "me",
+      "name": "小周",
+      "offer_id": "1254-water",
+      "meal": "火腿扒麦满分 + 纯悦",
+      "items": [
+        {
+          "productCode": "1254",
+          "quantity": 1
+        },
+        {
+          "productCode": "3757",
+          "quantity": 1
+        }
+      ],
+      "kcal": 261,
+      "meal_cents": 1750,
+      "shared_kcal": 0.0,
+      "shared_cents": 0,
+      "fee_cents": 0,
+      "total_cents": 1750,
+      "matched_preferences": [
+        "classic"
+      ],
+      "unmet_preferences": [
+        "burger"
+      ],
+      "official_adjustment_cents": 0
+    },
+    {
+      "participant_id": "wang",
+      "name": "小王",
+      "offer_id": "6800-water",
+      "meal": "原味板烧鸡腿麦满分 + 纯悦",
+      "items": [
+        {
+          "productCode": "6800",
+          "quantity": 1
+        },
+        {
+          "productCode": "3757",
+          "quantity": 1
+        }
+      ],
+      "kcal": 246,
+      "meal_cents": 2250,
+      "shared_kcal": 0.0,
+      "shared_cents": 0,
+      "fee_cents": 0,
+      "total_cents": 2250,
+      "matched_preferences": [
+        "grilled"
+      ],
+      "unmet_preferences": [],
+      "official_adjustment_cents": 0
+    },
+    {
+      "participant_id": "li",
+      "name": "小李",
+      "offer_id": "6800-water",
+      "meal": "原味板烧鸡腿麦满分 + 纯悦",
+      "items": [
+        {
+          "productCode": "6800",
+          "quantity": 1
+        },
+        {
+          "productCode": "3757",
+          "quantity": 1
+        }
+      ],
+      "kcal": 246,
+      "meal_cents": 2250,
+      "shared_kcal": 0.0,
+      "shared_cents": 0,
+      "fee_cents": 0,
+      "total_cents": 2250,
+      "matched_preferences": [
+        "grilled"
+      ],
+      "unmet_preferences": [],
+      "official_adjustment_cents": 0
+    }
+  ],
+  "shared": [],
+  "search_complete": true,
+  "search_nodes": 25,
+  "scope": "只在本次提供的候选餐中比较；共享小食能量按食用成员均分计入上限。",
+  "source": {
+    "kind": "official-mcp-live",
+    "endpoint": "https://mcp.mcd.cn",
+    "fetched_at": "2026-10-10 09:23:28",
+    "store_code": "1450713",
+    "store_name": "麦当劳上海黄浦华旭国际大厦餐厅",
+    "order_type": 1,
+    "be_type": 1,
+    "menu_period": "breakfast",
+    "notice": "菜单最多缓存5分钟；每个新方案重新进行官方整单核价。"
+  },
+  "acceptance": [
+    {
+      "check": "成员无遗漏",
+      "status": "PASS",
+      "detail": "3/3"
+    },
+    {
+      "check": "官方金额不超预算",
+      "status": "PASS",
+      "detail": "6250/10000 分"
+    },
+    {
+      "check": "已知偏好排除项",
+      "status": "PASS",
+      "detail": "含未知信息的候选已排除；不用于过敏安全判断"
+    },
+    {
+      "check": "必选餐品与指定能量上限",
+      "status": "PASS",
+      "detail": "共享小食参考能量已按食用成员均分计入"
+    },
+    {
+      "check": "分账金额守恒",
+      "status": "PASS"
+    },
+    {
+      "check": "优惠券所属账号及次数",
+      "status": "PASS",
+      "detail": "无券或在已提供限制内"
+    },
+    {
+      "check": "当前整单官方价格",
+      "status": "PASS",
+      "detail": "calculate-price 已返回业务成功；整单价差按原分账比例分摊"
+    }
+  ],
+  "estimated_total_cents": 6250,
+  "quoted_at": "2026-10-10 09:23:31",
+  "order_items": [
+    {
+      "productCode": "1254",
+      "quantity": 1
+    },
+    {
+      "productCode": "3757",
+      "quantity": 3
+    },
+    {
+      "productCode": "6800",
+      "quantity": 2
+    }
+  ],
+  "menu_cache_used": false,
+  "candidate_count": 8,
+  "evidence": {
+    "server": {
+      "name": "mcd-mcp",
+      "version": "1.0.0"
+    },
+    "records": [
+      {
+        "tool": "query-nearby-stores",
+        "datetime": "2026-10-10 09:23:02",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "query-meals",
+        "datetime": "2026-10-10 09:23:06",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "list-nutrition-foods",
+        "datetime": "2026-10-10 09:23:08",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "query-meal-detail",
+        "datetime": "2026-10-10 09:23:09",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "query-meal-detail",
+        "datetime": "2026-10-10 09:23:11",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "calculate-price",
+        "datetime": "2026-10-10 09:23:13",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "calculate-price",
+        "datetime": "2026-10-10 09:23:14",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "query-meal-detail",
+        "datetime": "2026-10-10 09:23:16",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "calculate-price",
+        "datetime": "2026-10-10 09:23:17",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "calculate-price",
+        "datetime": "2026-10-10 09:23:18",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "query-meal-detail",
+        "datetime": "2026-10-10 09:23:20",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "calculate-price",
+        "datetime": "2026-10-10 09:23:22",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "calculate-price",
+        "datetime": "2026-10-10 09:23:23",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "query-meal-detail",
+        "datetime": "2026-10-10 09:23:25",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "calculate-price",
+        "datetime": "2026-10-10 09:23:26",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "calculate-price",
+        "datetime": "2026-10-10 09:23:28",
+        "business_success": true,
+        "code": 200
+      },
+      {
+        "tool": "calculate-price",
+        "datetime": "2026-10-10 09:23:31",
+        "business_success": true,
+        "code": 200
+      }
+    ],
+    "mutating_tools_called": [],
+    "note": "仅只读业务查询与试算；没有创建订单、领券或购买会员卡。"
+  }
+}

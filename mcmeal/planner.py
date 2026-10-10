@@ -25,15 +25,19 @@ def split_cents(amount: int, ids: list[str]) -> dict[str, int]:
 
 
 def validate(request, menu):
+    if not isinstance(request, dict) or not isinstance(menu, dict):
+        raise InputError("需求和菜单必须是对象。")
     integer(request.get("budget_cents"), "budget_cents")
     integer(menu.get("fee_cents", 0), "fee_cents")
     people = request.get("participants", [])
-    if not 1 <= len(people) <= 8:
+    if not isinstance(people, list) or not 1 <= len(people) <= 8 or any(not isinstance(p, dict) for p in people):
         raise InputError("支持 1 至 8 人；更大饭局请拆分规划。")
     ids = [p.get("id") for p in people]
     if any(not isinstance(pid, str) or not pid for pid in ids) or len(set(ids)) != len(ids):
         raise InputError("participant id 必须是非空且不重复的字符串。")
     for person in people:
+        if not isinstance(person.get("name",person["id"]),str) or not 1 <= len(person.get("name",person["id"])) <= 40:
+            raise InputError("成员名称需为1至40个字符。")
         if person.get("max_kcal") is not None:
             integer(person["max_kcal"], "max_kcal")
         for field in ("exclude_tags", "prefer_tags", "required_categories"):
@@ -41,6 +45,8 @@ def validate(request, menu):
             if not isinstance(values, list) or any(not isinstance(v, str) for v in values):
                 raise InputError(f"{field} 必须为字符串列表。")
     offers = menu.get("offers", [])
+    if not isinstance(offers, list) or any(not isinstance(o, dict) for o in offers):
+        raise InputError("候选餐品必须为对象列表。")
     offer_ids = [o.get("id") for o in offers]
     if not offers or any(not isinstance(oid, str) or not oid for oid in offer_ids) or len(set(offer_ids)) != len(offer_ids):
         raise InputError("候选餐品不能为空，且 id 不得重复。")
@@ -146,6 +152,16 @@ def plan(request: dict, menu: dict, strategy="preference", node_limit=200000):
         return {"status": "infeasible", "reason": "预算低于候选餐的最低金额下界", "minimum_lower_bound_cents": min_total, "shortfall_at_least_cents": min_total-request["budget_cents"]}
     best, best_key = None, None
     visited, truncated = 0, False
+    minimums = [0]*(len(people)+1)
+    maximum_scores = [0]*(len(people)+1)
+    for index in range(len(people)-1,-1,-1):
+        minimums[index] = minimums[index+1]+min(o["price_cents"] for o in candidates[index])
+        maximum_scores[index] = maximum_scores[index+1]+max(preference_score(people[index],o) for o in candidates[index])
+        if strategy == "preference":
+            candidates[index].sort(key=lambda o:(-preference_score(people[index],o),o['price_cents'],o['id']))
+    limited_ids = sorted(oid for oid,o in offers.items() if o.get('max_quantity') is not None)
+    coupon_ids = sorted({o['coupon']['id'] for o in offers.values() if o.get('coupon')})
+    memo = {}
 
     def resources_ok():
         for oid, count in counts.items():
@@ -166,14 +182,28 @@ def plan(request: dict, menu: dict, strategy="preference", node_limit=200000):
         visited += 1
         if cost > request["budget_cents"] or not resources_ok():
             return
+        signature = tuple(o['id'] for o in chosen)
+        state = (index,cost,tuple(counts[oid] for oid in limited_ids),tuple(coupon_counts[cid] for cid in coupon_ids))
+        previous = memo.get(state)
+        if previous and (previous[0] > score or (previous[0] == score and previous[1] <= signature)):
+            return
+        memo[state] = (score,signature)
+        if best:
+            _, best_cost, best_score = best
+            if strategy == 'economy' and cost+minimums[index] > best_cost:
+                return
+            if strategy == 'preference':
+                if score+maximum_scores[index] < best_score:
+                    return
+                if score+maximum_scores[index] == best_score and cost+minimums[index] > best_cost:
+                    return
         if index == len(people):
             signature = tuple(o["id"] for o in chosen)
             key = (cost, -score, signature) if strategy == "economy" else (-score, cost, signature)
             if best_key is None or key < best_key:
                 best_key, best = key, (chosen[:], cost, score)
             return
-        remaining_minimum = sum(min(o["price_cents"] for o in choices) for choices in candidates[index:])
-        if cost + remaining_minimum > request["budget_cents"]:
+        if cost + minimums[index] > request["budget_cents"]:
             return
         for offer in candidates[index]:
             counts[offer["id"]] += 1

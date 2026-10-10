@@ -109,6 +109,20 @@ class PlannerTests(unittest.TestCase):
         plan(req,menu)
         self.assertEqual((req,menu),before)
 
+    def test_eight_people_search_finishes_with_duplicate_resources(self):
+        req=request(8,100000)
+        menu={'offers':[offer(str(i),1000+i*50,tags=['grilled'] if i%2 else []) for i in range(17)]}
+        for person in req['participants']:
+            person['prefer_tags']=['grilled']
+        result=plan(req,menu)
+        self.assertTrue(result['search_complete'])
+        self.assertEqual(result['total_cents'],8400)
+
+    def test_resource_memo_does_not_reuse_exhausted_coupon(self):
+        req={**request(3,10000),'payer_id':'payer'}
+        menu={'offers':[offer('limited',1,coupon={'id':'x','owner':'payer','max_uses':1}),offer('normal',100)]}
+        self.assertEqual(plan(req,menu,'economy')['total_cents'],201)
+
 
 class IntegrationContractTests(unittest.TestCase):
     def test_http_success_without_business_success_is_rejected(self):
