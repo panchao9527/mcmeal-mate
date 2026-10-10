@@ -65,6 +65,16 @@ class SkillPackageTests(unittest.TestCase):
                 build_archive(source, output)
             self.assertEqual(output.read_bytes(), original)
 
+    def test_line_endings_do_not_change_portable_package(self):
+        with tempfile.TemporaryDirectory(dir=self.temporary_root) as directory:
+            root=Path(directory)
+            source=self.make_source(root)
+            (source/'SKILL.md').write_bytes(b'first\r\nsecond\r\n')
+            windows=root/'windows.zip';build_archive(source,windows)
+            (source/'SKILL.md').write_bytes(b'first\nsecond\n')
+            unix=root/'unix.zip';build_archive(source,unix)
+            self.assertEqual(windows.read_bytes(),unix.read_bytes())
+
     def test_clean_install_and_existing_skill_preserved(self):
         with tempfile.TemporaryDirectory(dir=self.temporary_root) as directory:
             root = Path(directory)

@@ -44,7 +44,11 @@ def payload(source: Path = SOURCE_ROOT) -> dict[str, bytes]:
             raise ValueError(f"Skill file must not be a symbolic link: {relative}")
         if not candidate.resolve().is_relative_to(source):
             raise ValueError(f"Skill file is outside the source folder: {relative}")
-        result[relative] = candidate.read_bytes()
+        # The allowlist contains UTF-8 text only. Match Git's canonical LF blobs
+        # so Windows autocrlf does not change the published payload or manifest.
+        data = candidate.read_bytes()
+        data.decode('utf-8')
+        result[relative] = data.replace(b'\r\n', b'\n')
     manifest = {
         "name": SKILL_NAME,
         "files": {name: hashlib.sha256(data).hexdigest()
