@@ -20,7 +20,7 @@
 ```json
 {
   "id": "candidate-a",
-  "name": "从本次结果得到的餐品组合名称",
+  "name": "本次餐品组合全称，含每项数量、规格、饮料替换及特制",
   "categories": ["main", "drink"],
   "tags": ["grilled"],
   "known_tags": ["beef", "sugary-drink"],
@@ -50,7 +50,7 @@
 
 ## draft.json 与 receipt.json
 
-`prepare`输出preference/economy两套方案。可行方案的`quote_request`含真实调用参数和`plan_fingerprint`；不可行方案保留具体原因。
+`prepare`输出preference/economy两套方案。每个draft有独立`draft_id`；可行方案的`quote_request`含真实调用参数和`plan_fingerprint`，不可行方案保留具体原因。v0.4生成的draft不能用旧版本draft替代。
 
 宿主AI客户端调用`calculate-price`后，保存：
 
@@ -65,3 +65,13 @@
 `arguments`必须是此次实际调用所用的参数。finalize比对门店、商品、数量、套餐选择及方案指纹，检查工具错误、业务success、整数分价格和报价时间。真实报价超过15分钟、早于当前方案或发生参数错配时拒绝。指纹用于防止误用旧文件，不是官方数字签名或防伪证明。
 
 同一draft内两种策略若调用参数完全相同，可只调用一次，分别用对应指纹封装同一次返回。修改需求后重新normalize/prepare，再调用官方核价；不要给旧返回换上新指纹冒充新调用。
+
+## meal.json与购买回执
+
+`meal start`把session、独立draft、核价回执、购买预览及订单状态保存在一份记录中。所有运行文件保留本机；回执可能包含私人订单信息，不进入安装包或Git。文件哈希和独占锁用于避免错配和并行重复处理，不是签名或跨客户端的服务器幂等保证。
+
+整单报价结果增加`order_items`（已核价的完整商品参数）和`take_way_options`（原始`data.takeWayList`）。`meal preview`使用其中明确选择的code；不能创造取餐方式。候选组合名称和当前菜单详情一起用于展示数量、规格与特制，助手负责核对名称对应实际参数。
+
+购买确认、创建回执和订单查询回执的完整字段见[buying-workflow.md](buying-workflow.md)。元数据`confirmation_id/attempt_id/query_id/mode`只用于本地关联，真实MCP调用只传`arguments`。
+
+订单查询中的`orderStatus`按本次官方schema：1待支付，2已支付配餐，4配送中，6完成，7取消，8已评价，10餐厅配餐中；未知值保留未知。订单金额字符串当前按元解析为整数分；`calculate-price.price`本身为整数分，不能混用单位。实付金额无法解析时分账保持估算。

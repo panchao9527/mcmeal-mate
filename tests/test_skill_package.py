@@ -119,6 +119,10 @@ class SkillPackageTests(unittest.TestCase):
             self.assertEqual(demo.returncode,0,demo.stderr+demo.stdout)
             self.assertIn('demo_complete',demo.stdout)
             self.assertIn('虚构餐品和金额',(root/'demo-result/preference-share.md').read_text(encoding='utf-8'))
+            result=json.loads(demo.stdout)
+            self.assertEqual(result['buying_demo']['real_orders_created'],0)
+            self.assertEqual(result['buying_demo']['payment_status'],'paid')
+            self.assertIn('演示账单',(root/'demo-result/buying-transcript.md').read_text(encoding='utf-8'))
 
 
 if __name__ == "__main__":

@@ -11,6 +11,7 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+from uuid import uuid4
 
 from .planner import InputError, apply_official_total, integer, plan, validate
 from . import __version__
@@ -41,7 +42,7 @@ def instant(value):
     return parsed.replace(tzinfo=CHINA) if parsed.tzinfo is None else parsed
 
 
-def business(response, mode, now=None, not_before=None):
+def unwrap_business(response):
     value = deepcopy(response)
     for _ in range(6):
         if not isinstance(value, dict):
@@ -66,6 +67,11 @@ def business(response, mode, now=None, not_before=None):
             raise InputError('无法找到官方业务结果。')
     if not isinstance(value, dict) or value.get('success') is not True or not isinstance(value.get('data'), dict):
         raise InputError('业务结果未成功，不能标记为官方核价通过。')
+    return value
+
+
+def business(response, mode, now=None, not_before=None):
+    value=unwrap_business(response)
     integer(value['data'].get('price'), '官方价格（分）')
     if mode == 'live':
         quoted = instant(value.get('datetime'))
@@ -174,8 +180,8 @@ def basket(result, request, menu):
     return [grouped[key] for key in sorted(grouped)]
 
 
-def plan_digest(normalized, strategy, result, arguments, created_at):
-    return fingerprint({'normalized':normalized, 'strategy':strategy, 'result':result, 'arguments':arguments, 'created_at':created_at})
+def plan_digest(normalized, strategy, result, arguments, created_at, draft_id):
+    return fingerprint({'normalized':normalized, 'strategy':strategy, 'result':result, 'arguments':arguments, 'created_at':created_at,'draft_id':draft_id})
 
 
 def prepare(normalized):
@@ -185,15 +191,16 @@ def prepare(normalized):
     validate_context(context)
     plans = {}
     created_at = datetime.now(timezone.utc).isoformat()
+    draft_id = uuid4().hex
     for strategy in ('preference', 'economy'):
         result = plan(request, menu, strategy)
         entry = {'result':result}
         if result['status'] == 'planned':
             arguments = {**context, 'items':basket(result, request, menu)}
             entry['quote_request'] = {'tool':'calculate-price', 'arguments':arguments,
-                'plan_fingerprint':plan_digest(normalized, strategy, result, arguments, created_at)}
+                'plan_fingerprint':plan_digest(normalized, strategy, result, arguments, created_at,draft_id)}
         plans[strategy] = entry
-    return {'schema_version':1, 'mode':normalized['mode'], 'created_at':created_at, 'normalized':deepcopy(normalized), 'plans':plans}
+    return {'schema_version':1, 'mode':normalized['mode'], 'created_at':created_at,'draft_id':draft_id, 'normalized':deepcopy(normalized), 'plans':plans}
 
 
 def finalize(draft, receipt, strategy='preference', now=None):
@@ -204,7 +211,7 @@ def finalize(draft, receipt, strategy='preference', now=None):
     if not call:
         raise InputError('当前策略没有可核价方案。')
     normalized = draft['normalized']
-    expected = plan_digest(normalized, strategy, entry['result'], call['arguments'], draft['created_at'])
+    expected = plan_digest(normalized, strategy, entry['result'], call['arguments'], draft['created_at'],draft['draft_id'])
     if draft.get('mode') != normalized.get('mode') or call.get('plan_fingerprint') != expected:
         raise InputError('方案内容已修改，请重新prepare。')
     if receipt.get('plan_fingerprint') != expected or canonical(receipt.get('arguments')) != canonical(call['arguments']):
@@ -215,6 +222,8 @@ def finalize(draft, receipt, strategy='preference', now=None):
     result['quoted_at'] = response.get('datetime')
     result['plan_fingerprint'] = expected
     result['context'] = deepcopy(normalized['context'])
+    result['order_items'] = deepcopy(call['arguments']['items'])
+    result['take_way_options'] = deepcopy(response['data'].get('takeWayList',[]))
     offers = {o['id']:o for o in normalized['menu']['offers']}
     people = {p['id']:p.get('name',p['id']) for p in normalized['request']['participants']}
     result['shared_items'] = [{'name':offers[row['offer_id']]['name'], 'quantity':row.get('quantity',1),
@@ -243,7 +252,7 @@ def share(result):
     if over:
         lines += ['**本方案超出预算，请调整后重新生成。**', '']
     for row in result['allocations']:
-        lines.append(f"- {row['name']}：{row['meal']}；分摊 ¥{money(row['total_cents'])}")
+        lines.append(f"- {row['name']}：{row['meal']} × 1份；分摊 ¥{money(row['total_cents'])}")
         if row.get('shared_cents'):
             lines.append(f"  含共享小食 ¥{money(row['shared_cents'])}")
         if row.get('official_adjustment_cents'):
@@ -289,14 +298,21 @@ def run_demo(destination):
         save(destination/f'{strategy}-final.json', result)
         save(destination/f'{strategy}-share.md', share(result))
         totals[strategy] = result['total_cents']
-    return {'status':'demo_complete', 'network_calls':0, 'output':str(destination.resolve()), 'fictional_totals_cents':totals}
+    from .purchase import demo_purchase
+    buying=demo_purchase(session,destination)
+    return {'status':'demo_complete', 'network_calls':0, 'output':str(destination.resolve()), 'fictional_totals_cents':totals,'buying_demo':buying}
 
 
 def main():
     if hasattr(sys.stdout, 'reconfigure'):
         sys.stdout.reconfigure(encoding='utf-8')
+    if len(sys.argv)>1 and sys.argv[1]=='meal':
+        from .purchase import cli
+        cli(sys.argv[2:])
+        return
     parser = argparse.ArgumentParser(description='麦麦搭子 Skill 离线助手：不读Token、不联网')
     sub = parser.add_subparsers(dest='command', required=True)
+    sub.add_parser('meal',help='管理买餐记录、确认、订单回执、取餐查询和复购',add_help=False)
     sub.add_parser('doctor')
     demo = sub.add_parser('demo'); demo.add_argument('--out', required=True)
     for command in ('normalize', 'prepare', 'share'):
