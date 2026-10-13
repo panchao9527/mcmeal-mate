@@ -8,6 +8,14 @@
 
 **v0.4 的主入口是 Skill 对话。** 复用AI客户端的麦当劳MCP。附带Python助手离线管理需求、核价、购买确认和订单状态，不读取Token、不联网；无需启动网站。当前支持1至8人到店自取。
 
+## 对话示例
+
+下面用包内离线演练展示一次完整买餐对话。**图片是模拟示例，餐品、金额、订单和取餐码均为虚构，并非真实下单截图。**
+
+![麦麦搭子对话示例：3人90元预算，模拟省钱方案69元，确认后演练付款查询、取餐和每人23元分账](docs/assets/skill-demo.png)
+
+[查看完整演示脚本](docs/DEMO_SCRIPT.md) · [示例图来源与复现方法](docs/assets/README.md)
+
 ## 三步使用
 
 1. **安装技能包**：[下载 mcmeal-mate-skill.zip](https://github.com/panchao9527/mcmeal-mate/raw/refs/heads/main/dist/mcmeal-mate-skill.zip)。WorkBuddy 中按“技能 → 添加技能 → 上传技能”导入；其他客户端见[安装教程](docs/INSTALL.md)。客户端需支持本地 Skill、MCP 与 Python 3.10+ 执行。

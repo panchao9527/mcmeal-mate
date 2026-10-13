@@ -1,0 +1,102 @@
+"""Build the README illustration from the real, entirely fictional offline demo.
+
+This generates a presentation, not a client screenshot or real order evidence.
+Capture docs/assets/skill-demo.html with a browser to produce skill-demo.png.
+"""
+from html import escape
+import json
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+from mcmeal.native import read, run_demo
+
+
+def money(cents):
+    return f"{cents // 100}.{cents % 100:02d}"
+
+
+def main():
+    run = ROOT / 'local-runs/readme-image-demo'
+    result = run_demo(run)
+    state = read(run / 'meal.json')
+    assert state['mode'] == 'demo' and result['buying_demo']['real_orders_created'] == 0
+    economical = state['quotes']['economy']
+    budget = state['session']['request']['budget_cents']
+    rows = ''.join(
+        f'<div class="meal-row"><b>{escape(row["name"])}</b>'
+        f'<span>{escape(row["meal"])} × 1份</span>'
+        f'<strong>¥{money(row["total_cents"])}</strong></div>'
+        for row in economical['allocations'])
+    names = ' / '.join(escape(row['name']) for row in economical['allocations'])
+    amounts = ' / '.join('¥' + money(row['total_cents']) for row in economical['allocations'])
+    shared = '、'.join(f'{escape(row["name"])} × {row["quantity"]}' for row in economical['shared_items'])
+    source = r'''<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>麦麦搭子 · 对话示例（离线模拟）</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f5ed;color:#193e35;font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif}
+main{width:1120px;margin:0 auto;padding:44px 48px 32px}header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:26px}
+.eyebrow{font-size:18px;letter-spacing:2px;font-weight:700;margin-bottom:8px}.title{font-size:49px;line-height:1.3;font-weight:800;letter-spacing:-1px}
+.subtitle{font-size:23px;color:#52675e;margin-top:10px}.badge{font-size:18px;background:#f6d45b;border:1px solid #dfbd46;padding:11px 16px;border-radius:24px;white-space:nowrap;margin-top:5px}
+.notice{font-size:19px;line-height:1.65;padding:15px 20px;border:1px solid #ddd5aa;background:#fff9df;border-radius:12px;margin-bottom:27px;color:#6e5520}
+.step{display:grid;grid-template-columns:126px 1fr;gap:23px;margin-bottom:25px}.step-label{padding-top:13px;font-size:23px;font-weight:700}.step-label .num{font-size:35px;color:#879888;display:block;margin-bottom:6px;font-weight:400}
+.thread{display:flex;flex-direction:column;gap:12px}.bubble{border-radius:16px;padding:19px 24px;line-height:1.62;font-size:23px}
+.user{background:#193e35;color:#fff;margin-left:52px;border-bottom-right-radius:5px}.assistant{background:#fff;border:1px solid #dbe3d7;border-bottom-left-radius:5px}
+.role{display:block;font-size:16px;font-weight:700;letter-spacing:1px;margin-bottom:6px;color:#879d91}.user .role{color:#bad4c6}
+.muted{font-size:18px;color:#64766d;line-height:1.6}.options{display:flex;gap:13px;align-items:center;margin:7px 0 15px;font-size:21px}
+.chosen{padding:7px 13px;border-radius:9px;background:#eaf2e7;border:1px solid #c9d9c4;color:#214d38;font-weight:700}.alternate{color:#68796e}
+.meal-row{display:grid;grid-template-columns:66px 1fr 112px;gap:10px;padding:9px 0;border-bottom:1px solid #edf0e8;font-size:21px}.meal-row strong{text-align:right}
+.shared{margin-top:13px;font-size:20px}.total{display:flex;align-items:baseline;justify-content:space-between;margin:14px 0 11px}.price{font-size:38px;line-height:1;font-weight:800}.remaining{font-size:19px;color:#64766d}
+.small-note{font-size:18px;line-height:1.6;color:#746734;margin-top:12px}.status{display:inline-block;font-size:19px;font-weight:700;padding:5px 12px;border-radius:8px;background:#fff0c9;color:#815c12;margin-right:8px}
+.paid{background:#e9f3e7;color:#2c653d}.pickup{display:flex;align-items:center;gap:15px;margin:14px 0}.pickup strong{font-family:Consolas,monospace;font-size:31px;letter-spacing:2px}.pickup span{font-size:17px;color:#947238}
+.bill{background:#f3f6ef;border-radius:10px;padding:13px 18px;margin-top:14px;font-size:22px;line-height:1.65}.bill .names{color:#64766d;font-size:19px}
+footer{border-top:1px solid #dce2d5;padding-top:19px;margin-top:12px;font-size:17px;line-height:1.7;color:#64766d;display:flex;justify-content:space-between;gap:24px}
+</style></head><body><main>
+<header><div><div class="eyebrow">MCMEALMATE · SKILL 对话示例</div><div class="title">多人点餐，一次买齐</div><div class="subtitle">说清需求 → 看清清单 → 自己付款 → 取餐与分账</div></div><span class="badge">离线模拟演示</span></header>
+<div class="notice">本图依据包内离线演练排版，非客户端实测截图。餐品、金额、订单及取餐码均为虚构，未进行真实下单或支付。</div>
+<section class="step"><div class="step-label"><span class="num">01</span>说需求</div><div class="thread">
+<div class="bubble user"><span class="role">你</span>我们3个人，到店外带，预算@@BUDGET@@元。<br>小周主食不要牛肉，小陈饮料无糖；每人要主食和饮料，再共享一份薯条。</div>
+<div class="bubble assistant"><span class="role">麦麦搭子 · 演示回复</span>我会把大家的要求合成一份清单。<br><span class="muted">演示门店：虚构演示门店 · 当前演练使用包内示例餐品</span></div>
+</div></section>
+<section class="step"><div class="step-label"><span class="num">02</span>选方案</div><div class="thread">
+<div class="bubble user"><span class="role">你</span>就买省钱方案。</div>
+<div class="bubble assistant"><span class="role">麦麦搭子 · 模拟购买清单</span>
+<div class="options"><span class="chosen">省钱 ¥@@TOTAL@@</span><span class="alternate">照顾口味 ¥@@PREFERENCE@@</span></div>
+@@ROWS@@<div class="shared">共享：@@SHARED@@</div>
+<div class="total"><strong class="price">合计 ¥@@TOTAL@@</strong><span class="remaining">预算剩余 ¥@@REMAINING@@</span></div>
+<div class="muted">演示外带 · 未指定预约时间和餐具，按默认设置<br>每人金额已含共享薯条 ¥3.00。</div>
+<div class="small-note">省钱方案保留演示硬性要求；经典 / 板烧口味偏好未全部满足。<br>真实购买前，还会列明实际饮料、规格与特制，请看清再确认。</div>
+</div></div></section>
+<section class="step"><div class="step-label"><span class="num">03</span>确认购买</div><div class="thread">
+<div class="bubble user"><span class="role">你</span>确认下单。</div>
+<div class="bubble assistant"><span class="role">麦麦搭子 · 模拟订单</span><span class="status">待支付</span>模拟订单已创建。<br><span class="muted">真实使用时，会重新核价后创建待支付订单。<br>付款由你在官方页面完成；本演示没有可付款链接。</span></div>
+</div></section>
+<section class="step"><div class="step-label"><span class="num">04</span>取餐分账</div><div class="thread">
+<div class="bubble user"><span class="role">你</span>付好了，帮我查取餐码，再算一下每人多少钱。</div>
+<div class="bubble assistant"><span class="role">麦麦搭子 · 模拟查询结果</span><span class="status paid">模拟已支付</span>配餐中
+<div class="pickup"><strong>@@PICKUP@@</strong><span>演示码，不可取餐</span></div>
+<div class="bill"><div class="names">@@NAMES@@</div><strong>@@AMOUNTS@@</strong><br>演示分账合计 ¥@@TOTAL@@，可复制到群里。</div>
+</div></div></section>
+<footer><div>真实使用：导入 Skill，并连接麦当劳 MCP。<br>价格变化需重新确认；付款状态以官方查询结果为准。</div><div>原创演示排版 · v0.4<br>零网络 · 零真实订单</div></footer>
+</main></body></html>
+'''
+    substitutions = {
+        'BUDGET': money(budget), 'TOTAL': money(economical['total_cents']),
+        'PREFERENCE': money(state['quotes']['preference']['total_cents']),
+        'REMAINING': money(economical['remaining_cents']), 'ROWS': rows,
+        'SHARED': shared, 'NAMES': names, 'AMOUNTS': amounts,
+        'PICKUP': escape(state['order']['detail']['pickupCode']),
+    }
+    for key, value in substitutions.items():
+        source = source.replace('@@' + key + '@@', value)
+    assert '@@' not in source
+    output = ROOT / 'docs/assets/skill-demo.html'
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(source, encoding='utf-8')
+    print(json.dumps({'html': str(output), 'mode': 'demo', 'real_orders_created': 0}, ensure_ascii=False))
+
+
+if __name__ == '__main__':
+    main()
